@@ -1,0 +1,88 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Relise</th>
+    </tr>
+    </thead>
+    <tbody id="tableBody">
+    
+    </tbody>
+</table>
+<div id="formsContent">
+    <div id="divInfo" class="divForm">
+        <button type="button" id="btnInfo" class="btn btn-dark">Info</button>
+        <form id="formInfo" style="display: none">
+            <div class="form-group">
+                <label for="formInputInfo">Enter Id</label>
+                <input type="text" class="form-control" id="formInputInfo" placeholder="Id">
+            </div>
+            <div class="form-group">
+                <labe id="lblInfo"></labe>
+            </div>
+            <input class ="btn btn-dark" type="submit" name="Find" value="Find" id="sbmtInfo">
+        </form>
+        
+    </div>
+    <div id="divAdd" class="divForm">
+        <button type="button" id="btnAdd" class="btn btn-dark">Add</button>
+        <form id="formAdd" style="display: none" method="POST" onsubmit="return addRecord();">
+            <div class="form-group">
+                <label for="formInputAdd">Enter data</label>
+                <input type="text" class="form-control" id="formInputId" name="id" placeholder="Id">
+                <input type="text" class="form-control" id="formInputName" name="name"  placeholder="Name">
+                <input type="text" class="form-control" id="formInputJanr" name="janr" placeholder="Janr">
+                <input type="text" class="form-control" id="formInputAuthor" name="author" placeholder="Author">
+                <input type="text" class="form-control" id="formInputReliseDate" name="reliseDate" placeholder="Relise date">
+            </div>
+            <div class="form-group">
+                <labe id="lblAdd"></labe>
+            </div>
+            <input class ="btn btn-dark" type="submit" name="Add" value="Add" id="sbmtAdd">
+        </form>
+    </div>
+    <div id="divUpdate" class="divForm">
+        <button type="button" id="btnUpdate" class="btn btn-dark">Update</button>
+        <form id="formUpdate" style="display: none" method="POST" onsubmit="return updateRecord();">
+                    <div class="form-group">
+                        <label for="formInputCurrentId">Enter current id</label>
+                        <input type="text" class="form-control" id="formInputCurrentId" name="currentId" placeholder="Current id">
+                        <label for="formInputUpdateId">Enter new data</label>
+                        <input type="text" class="form-control" id="formInputUpdateId" name="changedId" placeholder="New id">
+                        <input type="text" class="form-control" id="formInputUpdateName" name="name"  placeholder="New name">
+                        <input type="text" class="form-control" id="formInputUpdateJanr" name="janr" placeholder="New janr">
+                        <input type="text" class="form-control" id="formInputUpdateAuthor" name="author" placeholder="New author">
+                        <input type="text" class="form-control" id="formInputUpdateReliseDate" name="reliseDate" placeholder="New relise date">
+                    </div>
+                    <div class="form-group">
+                        <labe id="lblUpdate"></labe>
+                    </div>
+                    <input class ="btn btn-dark" type="submit" name="Update" value="Update" id="sbmtUpdate">
+                </form>
+    </div>
+    <div id="divDelete" class="divForm">
+        <button type="button" id="btnDelete" class="btn btn-dark">Delete</button>
+        <form id="formDelete" style="display: none" onsubmit="return deleteRecord();">
+                    <div class="form-group">
+                        <label for="formInputDelete">Enter Id</label>
+                        <input type="text" class="form-control" id="formInputDelete" placeholder="Id">
+                    </div>
+                    <div class="form-group">
+                        <labe id="lblDelete"></labe>
+                    </div>
+                    <input class ="btn btn-dark" type="submit" name="Delete" value="Delete" id="sbmtDelete">
+                </form>
+    </div>
+</div>
