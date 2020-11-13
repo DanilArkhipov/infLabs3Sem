@@ -1,6 +1,7 @@
 using System.Dynamic;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using WebSocketManager;
 
 namespace Prac4
@@ -8,17 +9,22 @@ namespace Prac4
     public class ChatHandler : WebSocketHandler
     {
         private readonly ChatManager _chatManager;
-        public ChatHandler(WebSocketConnectionManager webSocketConnectionManager,ChatManager chatManager) : base(webSocketConnectionManager)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ChatHandler(WebSocketConnectionManager webSocketConnectionManager,ChatManager chatManager,IHttpContextAccessor httpContextAccessor) : base(webSocketConnectionManager)
         {
             _chatManager = chatManager;
+            _httpContextAccessor = httpContextAccessor;
         }
-        public async Task SendMessage(string socketId, string message)
+        public async Task SendMessage(string message)
         {
             dynamic dynamicMessage = new ExpandoObject();
-            dynamicMessage.UserId = socketId;
-            dynamicMessage.Message = message;
-            _chatManager.Messages.Add(dynamicMessage);
-            await InvokeClientMethodToAllAsync("pingMessage", socketId, message);
+            dynamicMessage.UserId = _httpContextAccessor.HttpContext.Session.GetString("name");
+            if (dynamicMessage.UserId != null)
+            {
+                dynamicMessage.Message = message;
+                _chatManager.Messages.Add(dynamicMessage);
+                await InvokeClientMethodToAllAsync("pingMessage", dynamicMessage.UserId, message);
+            }
         }
     }
 }

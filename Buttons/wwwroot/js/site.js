@@ -1,4 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your Javascript code.
@@ -118,22 +118,22 @@ $(document).ready(function() {
     }
 
     connection.clientMethods["pingMessage"] = (socketId, message) => {
-        var messageText = socketId + ' said: ' + message;
+        var messageText = socketId +': '+ message;
         $('#messages').append('<li>' + messageText + '</li>');
+        console.log(messageText);
         $('#messages').scrollTop($('#messages').prop('scrollHeight'));
     }
 
     connection.start();
 
-    var $messagecontent = $('#message-content');
-    $messagecontent.keyup(function(e) {
+    $('#message-content').keyup(function(e) {
         if (e.keyCode == 13) {
-            var message = $messagecontent.val().trim();
+            var message = $('#message-content').val().trim();
             if (message.length == 0) {
                 return false;
             }
-            connection.invoke("SendMessage", connection.connectionId, message);
-            $messagecontent.val('');
+            connection.invoke("SendMessage",message);
+            $('#message-content').val('');
         }
     });
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));

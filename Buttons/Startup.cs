@@ -25,8 +25,16 @@ namespace Prac4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".UserSession";
+                options.IdleTimeout = TimeSpan.FromSeconds(3600);
+                options.Cookie.IsEssential = true;
+            });
             services.AddWebSocketManager();
             services.AddSingleton<ChatManager>();
+            services.AddDistributedMemoryCache();
             services.AddRazorPages();
             services.AddControllers();
         }
@@ -45,9 +53,10 @@ namespace Prac4
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseWebSockets();
             app.MapWebSocketManager("/chatManager",serviceProvider.GetService<ChatHandler>());
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
