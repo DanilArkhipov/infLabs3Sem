@@ -4,4 +4,12 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="WebSocketManager" Version="1.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\js\WebSocketManager.js" />
+    </ItemGroup>
+
 </Project>

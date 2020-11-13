@@ -78,3 +78,13 @@ body {
   display: flex;
   flex-direction: column;
 }
+.top-space{
+  margin-top: 20px;
+}
+#messages{
+  position: relative;
+  background-color: whitesmoke;
+  height: 80vh;
+  max-height: 80vh;
+  overflow-y: auto;
+}

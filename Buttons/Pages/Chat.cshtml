@@ -1,0 +1,21 @@
+@page
+@model Prac4.Pages.Chat
+@{
+    ViewData["Title"] = "Chat";
+}
+@inject ChatManager ChatManager
+<div class="row top-space">
+    <div class="col-md-12">
+        <ul id="messages">
+            @foreach (var v in ChatManager.Messages)
+            {
+                <li>@v.UserId said: @v.Message</li>
+            }
+        </ul>
+        <input class="form-control" id="message-content"/>
+    </div>
+</div>
+
+@section Scripts{
+    <script data-main="scripts/main" src="js/WebSocketManager.js"></script>
+}
