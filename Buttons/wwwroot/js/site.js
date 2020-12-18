@@ -1,4 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your Javascript code.
@@ -104,3 +104,37 @@ function deleteRecord() {
         }})
     return false;
 }
+
+$(document).ready(function() {
+    var connection = new WebSocketManager.Connection("wss://localhost:44325/chatManager");
+    connection.enableLogging = true;
+
+    connection.connectionMethods.onConnected = () => {
+
+    }
+
+    connection.connectionMethods.onDisconnected = () => {
+
+    }
+
+    connection.clientMethods["pingMessage"] = (socketId, message) => {
+        var messageText = socketId +': '+ message;
+        $('#messages').append('<li>' + messageText + '</li>');
+        console.log(messageText);
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+    }
+
+    connection.start();
+
+    $('#message-content').keyup(function(e) {
+        if (e.keyCode == 13) {
+            var message = $('#message-content').val().trim();
+            if (message.length == 0) {
+                return false;
+            }
+            connection.invoke("SendMessage",message);
+            $('#message-content').val('');
+        }
+    });
+    $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+});

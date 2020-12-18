@@ -7,6 +7,8 @@
       <e p="appsettings.Development.json" t="Include" />
       <e p="appsettings.json" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="ChatHandler.cs" t="Include" />
+      <e p="ChatManager.cs" t="Include" />
       <e p="Controllers" t="Include">
         <e p="MovieController.cs" t="Include" />
       </e>
@@ -25,6 +27,8 @@
       <e p="Pages" t="Include">
         <e p="_ViewImports.cshtml" t="Include" />
         <e p="_ViewStart.cshtml" t="Include" />
+        <e p="Chat.cshtml" t="Include" />
+        <e p="Chat.cshtml.cs" t="Include" />
         <e p="Error.cshtml" t="Include" />
         <e p="Error.cshtml.cs" t="Include" />
         <e p="Index.cshtml" t="Include" />

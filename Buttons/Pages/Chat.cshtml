@@ -1,0 +1,31 @@
+@page
+@model Prac4.Pages.Chat
+@{
+    ViewData["Title"] = "Chat";
+}
+@inject ChatManager ChatManager
+<div class="row top-space">
+    @{
+        var session = HttpContext.Session;
+        if (session.Keys.Contains("name"))
+        {
+            <div class="col-md-12">
+                <ul id="messages">
+                    @foreach (var v in ChatManager.Messages)
+                    {
+                        <li>@v.UserId : @v.Message</li>
+                    }
+                </ul>
+                <input class="form-control" id="message-content"/>
+            </div>
+        }
+        else
+        {
+            <h1>Для того чтобы воспользоваться чатом войдите в систему</h1>
+        }
+    }
+</div>
+
+@section Scripts{
+    <script data-main="scripts/main" src="js/WebSocketManager.js"></script>
+}

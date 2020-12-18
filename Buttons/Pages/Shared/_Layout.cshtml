@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Prac4</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
 </head>
@@ -24,8 +25,71 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Chat">Chat</a>
+                    </li>
                 </ul>
             </div>
+            @{
+                var session = Context.Session;
+                if (!session.Keys.Contains("name"))
+                {
+                    <div class="dropdown" id="dropdownEnter">
+                        <button class="btn btn-enter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Войти
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <form class="dropdown-item" method="POST" asp-page-handler="Enter">
+                                <div class="form-group">
+                                    <label for="nickName">Имя</label>
+                                    <input type="text" class="form-control" id="nickName" aria-describedby="nickNameHelp" name="name">
+                                    <small id="nickNameHelp" class="form-text text-muted">Введите Ваше имя.</small>
+                                </div>
+                                <button type="submit" class="btn btn-enter">Войти</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="dropdown" id="dropdownLogout">
+                        <button class="btn btn-enter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @session.GetString("name")
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <form class="dropdown-item" method="POST" asp-page-handler="Logout">
+                                <button type="submit" class="btn btn-enter">Выйти</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+            @*<div class="dropdown" id="dropdownEnter">
+                <button class="btn btn-enter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Войти
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <form class="dropdown-item" method="POST" asp-page-handler="Enter">
+                        <div class="form-group">
+                            <label for="nickName">Имя</label>
+                            <input type="text" class="form-control" id="nickName" aria-describedby="nickNameHelp" name="name">
+                            <small id="nickNameHelp" class="form-text text-muted">Введите Ваше имя.</small>
+                        </div>
+                        <button type="submit" class="btn btn-enter">Войти</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="dropdown" id="dropdownLogout">
+                <button class="btn btn-enter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    НИК
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <form class="dropdown-item" method="POST" asp-page-handler="Logout">
+                        <button type="submit" class="btn btn-enter">Выйти</button>
+                    </form>
+                </div>
+            </div>*@
         </div>
     </nav>
 </header>
