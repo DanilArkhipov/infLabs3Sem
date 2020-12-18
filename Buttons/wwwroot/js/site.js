@@ -14,7 +14,7 @@ function loadTable(){
             //<tr id="tr11"><td id="td11">11</td><td id="td12">12</td>
             data.forEach(function (el,i)
                 {
-                    str+="<tr><td>"+num+"</td><td>"+el.name+"</td><td>"+el.author+"</td><td>"+el.reliseDate+"</td></tr>"
+                    str+="<tr><td>"+num+"</td><td>"+el.name+"</td><td>"+el.author+"</td><td>"+el.relise_Date+"</td></tr>"
                     num++;
                 }
             )
@@ -34,7 +34,7 @@ $("#formInfo").submit(function (event){
         url: "https://localhost:44325/movies/get/"+str,
         dataType: "json",
         success: function (data){
-            let dataStr = "Id:" + data.id+ "<br>" + "Название:" + data.name+"<br>"+"Жанр:" + data.janr+"<br>"+ "Режиссёр:" + data.author+"<br>" + "Дата выхода:" + data.reliseDate;
+            let dataStr = "Id:" + data.id+ "<br>" + "Название:" + data.name+"<br>"+"Жанр:" + data.genre+"<br>"+ "Режиссёр:" + data.author+"<br>" + "Дата выхода:" + data.relise_Date;
             $("#lblInfo").empty();
             $("#lblInfo").append(dataStr);
         },

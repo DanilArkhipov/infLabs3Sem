@@ -33,6 +33,7 @@ namespace Prac4
                 options.Cookie.IsEssential = true;
             });
             services.AddWebSocketManager();
+            services.AddSingleton<DbMovieContext>();
             services.AddSingleton<ChatManager>();
             services.AddDistributedMemoryCache();
             services.AddRazorPages();
